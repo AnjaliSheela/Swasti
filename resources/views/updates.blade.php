@@ -60,18 +60,13 @@
 						<li>
 							<a href="/courses"><span aria-hidden="true" class="icon_comment"></span><br>Courses</a>
 						</li>
-            @if(Auth::User()->role==1)
+            @if(Auth::User()->role>0)
 						<li>
               <a href="/mentor"><span aria-hidden="true" class="icon_comment"></span><br>Mentor</a>
 						</li>
-            @elseif(Auth::User()->role==2)
-            <li>
-              <a href="/admin"><span aria-hidden="true" class="icon_profile"></span><br>Admin</a>
-            </li>
-            @else
             @endif
 						<li>
-              <a href="/updates"><span aria-hidden="true" class="icon_profile"></span><br>Updates</a>
+							<a href="/updates"><span aria-hidden="true" class="icon_profile"></span><br>Updates</a>
 						</li>
 						<li>
                   <a href="{{ url('/logout') }}"
@@ -137,14 +132,10 @@
         <div class="services-container">
 	        <div class="container">
 	            <div class="row">
-                @foreach($courses as $course)
-	            	<div class="col-sm-3">
-		                <div class="service wow fadeInUp">
-		                    <div class="service-icon"><span aria-hidden="true" class="icon_gift"></span></div>
-		                    <h3>{{$course->name}}</h3>
-		                    <p>{{$course->description}} </p>
-		                    <a class="big-link-1" href="#">Read more</a>
-		                </div>
+                @foreach($status as $s)
+                <div class="list-group">
+                    <button type="button" class="list-group-item"><b>{{$s->status}}</b> <span class="label label-default">{{$s->created_at->format('d/m/Y')}}</span></button>
+
 					      </div>
           @endforeach
 	            </div>

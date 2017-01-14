@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\courses;
+use App\Status;
 
 class HomeController extends Controller
 {
@@ -16,6 +18,11 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+    public function status(){
+      $status= Status::orderBy('id','desc')->get();
+      return view('updates')->withStatus($status);
+    }
+
     /**
      * Show the application dashboard.
      *
@@ -23,6 +30,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+      $courses = courses::get();
+      return view('home')->withCourses($courses);
     }
 }
